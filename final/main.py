@@ -17,6 +17,7 @@ Para rodar:
 """
 
 from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, status
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 import models
@@ -30,6 +31,20 @@ app = FastAPI(
     title="API de Eventos do Campus",
     description="Laboratório da Aula 08 — agora com upload de arquivos",
     version="3.0.0",
+)
+
+ORIGENS_PERMITIDAS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://salmon-cliff-0be62d50f.5.azurestaticapps.net",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ORIGENS_PERMITIDAS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Content-type aceito -> extensão que o blob vai receber.
