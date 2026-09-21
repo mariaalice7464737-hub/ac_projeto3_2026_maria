@@ -1,4 +1,0 @@
-fastapi[standard]
-sqlalchemy
-azure-storage-blob
-python-dotenv
